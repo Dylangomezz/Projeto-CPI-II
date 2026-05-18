@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getTopAnimes, searchAnimes } from './services/api';
+import Swal from 'sweetalert2';
 
 function App() {
   const [animes, setAnimes] = useState([]);
@@ -47,6 +48,76 @@ function App() {
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchTerm]);
+
+const handleOpenModal = (anime) => {
+  // Tradução simples do status para ficar com cara de sistema profissional
+  const statusTraduzido = anime.status === 'Currently Airing' ? 'Em exibição' : 'Concluído';
+
+  Swal.fire({
+    title: `<span class="text-slate-100 font-extrabold text-xl md:text-2xl">${anime.title}</span>`,
+    html: `
+      <div class="text-left text-slate-300 text-sm space-y-4 max-h-[60vh] overflow-y-auto px-1">
+        <div class="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
+          <img src="${anime.images?.jpg?.image_url}" alt="${anime.title}" class="w-32 h-44 object-cover rounded-lg shadow-md border border-slate-700" />
+          <div class="space-y-1.5 text-xs">
+            <p><strong class="text-rose-400">Nota:</strong> ⭐ ${anime.score || 'N/A'}</p>
+            <p><strong class="text-rose-400">Episódios:</strong> ${anime.episodes || 'Não informado'}</p>
+            <p><strong class="text-rose-400">Status:</strong> ${statusTraduzido}</p>
+            <p><strong class="text-rose-400">Ano:</strong> ${anime.year || 'N/A'}</p>
+            <p><strong class="text-rose-400">Estúdio:</strong> ${anime.studios?.[0]?.name || 'Desconhecido'}</p>
+          </div>
+        </div>
+        
+        <div class="pt-2">
+          <h5 class="text-rose-500 font-bold mb-1 text-xs uppercase tracking-wider">Sinopse</h5>
+          <p class="text-slate-400 text-xs leading-relaxed text-justify">
+            ${anime.synopsis ? anime.synopsis : 'Nenhuma sinopse disponível para este título.'}
+          </p>
+        </div>
+      </div>
+    `,
+    background: '#0f172a', // bg-slate-900
+    color: '#f8fafc',      // text-slate-50
+    showCancelButton: !!anime.trailer?.embed_url, // Só mostra o botão do trailer se o link existir
+    confirmButtonText: 'Fechar',
+    cancelButtonText: '🎬 Assistir Trailer',
+    confirmButtonColor: '#334155', // Slate 700
+    cancelButtonColor: '#e11d48',  // Rose 600
+    reverseButtons: true,
+    customClass: {
+      popup: 'border border-slate-800 rounded-2xl shadow-2xl max-w-lg w-11/12',
+      title: 'border-b border-slate-800 pb-3',
+    }
+  }).then((result) => {
+    // Se o usuário clicar no botão "Assistir Trailer" (botão de cancelamento customizado)
+    if (result.dismiss === Swal.DismissReason.cancel && anime.trailer?.embed_url) {
+      handleOpenTrailer(anime.trailer.embed_url, anime.title);
+    }
+  });
+};
+
+// Segunda função para abrir o trailer em uma janela limpa do SweetAlert2 com um <iframe>
+const handleOpenTrailer = (embedUrl, title) => {
+  Swal.fire({
+    title: `<span class="text-slate-100 font-bold text-lg">${title} - Trailer</span>`,
+    html: `
+      <div class="w-full aspect-video rounded-lg overflow-hidden border border-slate-800 mt-2">
+        <iframe 
+          src="${embedUrl}" 
+          title="${title} Trailer" 
+          class="w-full h-full"
+          allowfullscreen
+        ></iframe>
+      </div>
+    `,
+    background: '#0f172a',
+    confirmButtonText: 'Voltar',
+    confirmButtonColor: '#e11d48',
+    customClass: {
+      popup: 'border border-slate-800 rounded-2xl max-w-2xl w-11/12',
+    }
+  });
+};
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50 flex flex-col">
@@ -142,7 +213,7 @@ function App() {
                         {anime.title}
                       </h4>
                       <div className="flex gap-2 mt-2">
-                        <button className="flex-1 bg-slate-800 hover:bg-rose-600 text-slate-200 hover:text-white text-xs font-semibold py-2 rounded transition-colors">
+                        <button onClick={() => handleOpenModal(anime)} className="flex-1 bg-slate-800 hover:bg-rose-600 text-slate-200 hover:text-white text-xs font-semibold py-2 rounded transition-colors">
                           Ver Detalhes
                         </button>
                       </div>
