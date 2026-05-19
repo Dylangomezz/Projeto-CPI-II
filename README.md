@@ -1,7 +1,7 @@
 # Anilog ⚡
 > **Ecossistema de streaming e estatística de anime.**
 
-[cite_start]O **Anilog** é uma aplicação web moderna desenvolvida como projeto final para a disciplina de **Construção de Páginas para Internet II**. [cite_start]A plataforma funciona como um agregador inteligente de animes, consumindo dados em tempo real da API pública do MyAnimeList para fornecer informações detalhadas, exibição de trailers e uma ferramenta personalizada de análise estatística de consumo[cite: 7, 10].
+O **Anilog** é uma aplicação web moderna desenvolvida como projeto final para a disciplina de **Construção de Páginas para Internet II**. A plataforma funciona como um agregador inteligente de animes, consumindo dados em tempo real da API pública do MyAnimeList para fornecer informações detalhadas, exibição de trailers e uma ferramenta personalizada de análise estatística de consumo.
 
 ---
 
@@ -9,21 +9,21 @@
 
 O projeto foi construído utilizando as ferramentas mais modernas do ecossistema JavaScript:
 
-- [cite_start]**Framework Core:** [React](https://react.dev/) (estruturado de forma modular e rápida através do Vite)[cite: 6].
-- [cite_start]**Framework CSS:** [Tailwind CSS](https://tailwindcss.com/) (responsividade nativa e visual em *Dark Mode*)[cite: 20].
-- [cite_start]**Requisições HTTP:** [Axios](https://axios-http.com/) (centralização das chamadas de API e tratamento de erros)[cite: 31].
-- [cite_start]**Pop-ups e Modals:** [SweetAlert2](https://sweetalert2.github.io/) (interações elegantes e renderização de mídia em *iframes*)[cite: 34].
-- [cite_start]**Gráficos Dinâmicos:** [Chart.js](https://www.chartjs.org/) + `react-chartjs-2` (geração de métricas por gênero de anime)[cite: 35].
+- **Framework Core:** [React](https://react.dev/) (estruturado de forma modular e rápida através do Vite).
+- **Framework CSS:** [Tailwind CSS](https://tailwindcss.com/) (responsividade nativa e visual em *Dark Mode*).
+- **Requisições HTTP:** [Axios](https://axios-http.com/) (centralização das chamadas de API e tratamento de erros).
+- **Pop-ups e Modals:** [SweetAlert2](https://sweetalert2.github.io/) (interações elegantes e renderização de mídia em *iframes*).
+- **Gráficos Dinâmicos:** [Chart.js](https://www.chartjs.org/) + `react-chartjs-2` (geração de métricas por gênero de anime).
 
 ---
 
 ## 🚀 Funcionalidades Principais (Requisitos Atendidos)
 
-- [cite_start]**[RF01] Catálogo Dinâmico e Busca:** Renderização contínua dos títulos mais populares do momento e barra de busca integrada com filtro por texto em tempo real consumindo a *Jikan API*[cite: 31].
-- [cite_start]**[RF02] Lista de Favoritos ("Minha Lista"):** Lógica em JavaScript puro para salvar, remover e persistir animes favoritos localmente no navegador (`localStorage`)[cite: 32].
-- [cite_start]**[RF03] Histórico de Visualização:** Sistema automatizado de *tracking* que armazena os metadados (como o gênero principal do anime) toda vez que um usuário interage assistindo a um trailer[cite: 33].
-- [cite_start]**[RF04] Modals de Vídeo Dinâmicos:** Pop-ups interativos gerados via SweetAlert2 que mostram detalhes técnicos, sinopse, e incorporam o player do YouTube para trailers oficiais[cite: 34].
-- [cite_start]**[RF05] Dashboard Estatístico:** Um painel gráfico interativo que faz o mapeamento e contagem manual de dados para desenhar um gráfico no formato de Rosca (*Doughnut*) mostrando as preferências de gênero do usuário[cite: 10, 35].
+- **[RF01] Catálogo Dinâmico e Busca:** Renderização contínua dos títulos mais populares do momento e barra de busca integrada com filtro por texto em tempo real consumindo a *Jikan API*.
+- **[RF02] Lista de Favoritos ("Minha Lista"):** Lógica em JavaScript puro para salvar, remover e persistir animes favoritos localmente no navegador (`localStorage`).
+- **[RF03] Histórico de Visualização:** Sistema automatizado de *tracking* que armazena os metadados (como o gênero principal do anime) toda vez que um usuário interage assistindo a um trailer.
+- **[RF04] Modals de Vídeo Dinâmicos:** Pop-ups interativos gerados via SweetAlert2 que mostram detalhes técnicos, sinopse, e incorporam o player do YouTube para trailers oficiais.
+- **[RF05] Dashboard Estatístico:** Um painel gráfico interativo que faz o mapeamento e contagem manual de dados para desenhar um gráfico no formato de Rosca (*Doughnut*) mostrando as preferências de gênero do usuário.
 
 ---
 
@@ -41,3 +41,34 @@ Anilog/
 ├── tailwind.config.js # Configurações de utilitários de estilo
 ├── package.json       # Gerenciamento de scripts e dependências
 └── README.md          # Documentação do projeto
+```
+
+---
+
+## 💻 Como Rodar o Projeto Localmente
+
+1. Certifique-se de ter o Node.js instalado na sua máquina.
+
+2. Extraia o arquivo .zip do projeto e abra a pasta no terminal do seu editor de código (como VS Code).
+
+3. Instale as dependências listadas no package.json rodando o comando:
+    ```text
+    npm install
+    ```
+
+4. Inicie o servidor de desenvolvimento local executando:
+    ```text
+    npm run dev
+    ```
+
+5. O terminal gerará um link local (geralmente http://localhost:5173/). Copie o endereço e cole na barra do seu navegador de internet para visualizar o Anilog funcionando!
+
+---
+
+## 🎓 Autor
+**Dylan Gomes Felix**
+
+---
+
+## 🏫 Instituição
+**Instituto Federal de Brasília - Campus Brasília Curso: Tecnólogo em Sistemas para Internet**
